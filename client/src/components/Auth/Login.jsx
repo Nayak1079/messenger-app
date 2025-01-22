@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, ButtonGroup, Heading, VStack } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router";
 import * as Yup from "yup";
-import TextField from "./TextField";
+import TextField from "../TextField";
+import { useContext } from "react";
+import {AccountContext} from "../AccountContext"
 
 const Login = () => {
+   const {setUser}=useContext(AccountContext)
     const navigate = useNavigate();
   return (
     <Formik
@@ -26,7 +29,7 @@ const Login = () => {
    
       fetch("http://localhost:4000/auth/login", {
         method: "POST",
-        credentials: "include",
+        credentials: "include",//browser will send cookies (like session cookies) or login information with the request.
         headers: {
           "Content-Type": "application/json",
         },
@@ -44,6 +47,8 @@ const Login = () => {
         .then(data => {
           if (!data) return;
           console.log(data);
+          setUser({...data});
+          navigate("/home");
         }); }}
   >
     <VStack
