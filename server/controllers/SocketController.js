@@ -38,7 +38,7 @@ module.exports.initializeUser = async (socket) => {
 
   const msgQuery = await redisClient.lrange(`chat:${socket.user.userid}`, 0, -1);
   const messages = msgQuery.map(msgStr => {
-    const parsedStr = msgStr.split(".");
+    const parsedStr = msgStr.split(".");                                                                                                                                                                                                              
     return { to: parsedStr[0], from: parsedStr[1], content: parsedStr[2] };
   });
   
@@ -105,7 +105,6 @@ const parseFriendList = async (friendList) => {
 module.exports.dm = async (socket, message) => {
   message.from = socket.user.userid;
   const messageString = [message.to, message.from, message.content].join(".");
-  
   await redisClient.lpush(`chat:${message.to}`, messageString);
   await redisClient.lpush(`chat:${message.from}`, messageString);
   

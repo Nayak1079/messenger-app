@@ -5,9 +5,7 @@ module.exports.rateLimiter = // Export the rateLimiter function as middleware
 
     const ip = req.connection.remoteAddress; // Get the IP address of the client making the request
 
-    // The next line seems to be incomplete or an error. It should be removed or corrected.
-    // cons;
-
+    
     [response] = await redisClient // Use Redis client to execute multiple commands in a transaction
       .multi() // Start a Redis multi command to perform multiple actions atomically
       .incr(ip) // Increment the request count for the client's IP address in Redis

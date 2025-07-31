@@ -28,7 +28,7 @@ const io = new Server(server, {
 // Create a Redis client to connect to the Redis server
 const redisClient = new Redis();
 
-// Security Middleware
+// Security Middleware 
 app.use(helmet()); // Adds security-related HTTP headers to the responses
 app.use(
   cors({

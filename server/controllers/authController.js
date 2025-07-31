@@ -55,7 +55,6 @@ module.exports.attemptRegister = async (req, res) => {
       id: newUserQuery.rows[0].id,
       userid: newUserQuery.rows[0].userid,
     };
-
     res.json({ loggedIn: true, username: req.body.username });
   } else {
     res.json({ loggedIn: false, status: "Username taken" });
